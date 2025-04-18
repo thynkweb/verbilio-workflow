@@ -1,4 +1,4 @@
-import LangflowLogo from "@/assets/LangflowLogo.svg?react";
+import VerbilioLogo from "@/assets/VerbilioLogo.svg?react";
 import { TextEffectPerChar } from "@/components/ui/textAnimation";
 import { ENABLE_IMAGE_ON_PLAYGROUND } from "@/customization/feature-flags";
 import { track } from "@/customization/utils/analytics";
@@ -202,8 +202,8 @@ export default function ChatView({
             <>
               <div className="flex h-full w-full flex-col items-center justify-center">
                 <div className="flex flex-col items-center justify-center gap-4 p-8">
-                  <LangflowLogo
-                    title="Langflow logo"
+                  <VerbilioLogo
+                    title="Verbilio logo"
                     className="h-10 w-10 scale-[1.5]"
                   />
                   <div className="flex flex-col items-center justify-center">

@@ -36,11 +36,21 @@ export const HeaderMenuItemLink = ({
   children,
   newPage = false,
   icon = "external-link",
+  className,
+}: {
+  href: string;
+  children: React.ReactNode;
+  newPage?: boolean;
+  icon?: string | null;
+  className?: string;
 }) => (
   <DropdownMenuItem className="cursor-pointer rounded-none p-3 px-4" asChild>
     <a
       href={href}
-      className="group flex w-full items-center justify-between"
+      className={cn(
+        `group flex w-full items-center justify-between`,
+        className,
+      )}
       {...(newPage ? { rel: "noreferrer", target: "_blank" } : {})}
     >
       {children}
