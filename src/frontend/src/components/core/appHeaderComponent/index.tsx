@@ -1,6 +1,5 @@
 import AlertDropdown from "@/alerts/alertDropDown";
-import DataStaxLogo from "@/assets/DataStaxLogo.svg?react";
-import LangflowLogo from "@/assets/LangflowLogo.svg?react";
+import VerbilioLogo from "@/assets/VerbilioLogo.svg?react";
 import ForwardedIconComponent from "@/components/common/genericIconComponent";
 import ShadTooltip from "@/components/common/shadTooltipComponent";
 import { Button } from "@/components/ui/button";
@@ -59,21 +58,17 @@ export default function AppHeader(): JSX.Element {
         <Button
           unstyled
           onClick={() => navigate("/")}
-          className="mr-1 flex h-8 w-8 items-center"
+          className="mr-1 flex h-[4rem] w-[6rem] items-center overflow-hidden"
           data-testid="icon-ChevronLeft"
         >
-          {ENABLE_DATASTAX_LANGFLOW ? (
-            <DataStaxLogo className="fill-black dark:fill-[white]" />
-          ) : (
-            <LangflowLogo className="h-5 w-6" />
-          )}
+          <VerbilioLogo />
         </Button>
-        {ENABLE_DATASTAX_LANGFLOW && (
+        {/* {ENABLE_DATASTAX_LANGFLOW && (
           <>
             <CustomOrgSelector />
             <CustomProductSelector />
           </>
-        )}
+        )} */}
       </div>
 
       {/* Middle Section */}
@@ -86,19 +81,6 @@ export default function AppHeader(): JSX.Element {
         className={`z-30 flex items-center gap-2`}
         data-testid="header_right_section_wrapper"
       >
-        {!ENABLE_DATASTAX_LANGFLOW && (
-          <>
-            <Button
-              unstyled
-              className="hidden items-center whitespace-nowrap pr-2 2xl:inline"
-              onClick={() =>
-                window.open("https://github.com/langflow-ai/langflow", "_blank")
-              }
-            >
-              <GithubStarComponent />
-            </Button>
-          </>
-        )}
         <AlertDropdown
           notificationRef={notificationContentRef}
           onClose={() => setActiveState(null)}
@@ -136,37 +118,37 @@ export default function AppHeader(): JSX.Element {
             </AlertDropdown>
           </ShadTooltip>
         </AlertDropdown>
-        {!ENABLE_DATASTAX_LANGFLOW && (
-          <>
-            <ShadTooltip
-              content="Go to Langflow Store"
-              side="bottom"
-              styleClasses="z-10"
+
+        <>
+          <ShadTooltip
+            content="Go to Verbilio Store"
+            side="bottom"
+            styleClasses="z-10"
+          >
+            <Button
+              variant="ghost"
+              className={` ${lastPath === "store" ? "bg-accent text-accent-foreground" : ""} z-50`}
+              onClick={() => {
+                navigate("/store");
+              }}
+              data-testid="button-store"
             >
-              <Button
-                variant="ghost"
-                className={` ${lastPath === "store" ? "bg-accent text-accent-foreground" : ""} z-50`}
-                onClick={() => {
-                  navigate("/store");
-                }}
-                data-testid="button-store"
-              >
-                <ForwardedIconComponent
-                  name="Store"
-                  className="side-bar-button-size h-[18px] w-[18px]"
-                />
-                <span className="hidden whitespace-nowrap">Store</span>
-              </Button>
-            </ShadTooltip>
-            <Separator
-              orientation="vertical"
-              className="my-auto h-7 dark:border-zinc-700"
-            />
-          </>
-        )}
+              <ForwardedIconComponent
+                name="Store"
+                className="side-bar-button-size h-[18px] w-[18px]"
+              />
+              <span className="hidden whitespace-nowrap">Store</span>
+            </Button>
+          </ShadTooltip>
+          <Separator
+            orientation="vertical"
+            className="my-auto h-7 dark:border-zinc-700"
+          />
+        </>
+
         {ENABLE_DATASTAX_LANGFLOW && (
           <>
-            <ShadTooltip content="Docs" side="bottom" styleClasses="z-10">
+            {/* <ShadTooltip content="Docs" side="bottom" styleClasses="z-10">
               <Button
                 variant="ghost"
                 className="flex text-sm font-medium"
@@ -185,7 +167,7 @@ export default function AppHeader(): JSX.Element {
                   Docs
                 </span>
               </Button>
-            </ShadTooltip>
+            </ShadTooltip> */}
             <ShadTooltip content="Settings" side="bottom" styleClasses="z-10">
               <Button
                 data-testid="user-profile-settings"

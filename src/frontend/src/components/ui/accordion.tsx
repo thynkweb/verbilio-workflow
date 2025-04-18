@@ -22,38 +22,46 @@ AccordionItem.displayName = "AccordionItem";
 
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
-  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
->(({ className, children, disabled, ...props }, ref) => (
-  <AccordionPrimitive.Header className="flex">
-    <AccordionPrimitive.Trigger
-      disabled={disabled}
-      asChild
-      ref={ref}
-      {...props}
-    >
-      <div
-        className={cn(
-          "flex flex-1 cursor-pointer items-center justify-between py-4 text-sm font-medium transition-all [&[data-state=open]>svg]:rotate-180",
-          className,
-        )}
+  React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger> & {
+    icon?: React.ReactNode;
+  }
+>(
+  (
+    { className, children, disabled, icon = <ChevronDownIcon />, ...props },
+    ref,
+  ) => (
+    <AccordionPrimitive.Header className="flex w-full">
+      <AccordionPrimitive.Trigger
+        disabled={disabled}
+        asChild
+        ref={ref}
+        {...props}
       >
-        {children}
-        <ShadTooltip
-          styleClasses="z-50"
-          content={disabled ? "Empty" : "Open"}
-          side="top"
+        <div
+          className={cn(
+            "flex flex-1 cursor-pointer items-center justify-between py-4 text-sm font-medium transition-all [&[data-state=open]>svg]:rotate-180",
+            className,
+          )}
         >
-          <ChevronDownIcon
-            className={cn(
-              "h-4 w-4 font-bold transition-transform duration-200",
-              disabled ? "text-muted-foreground" : "text-primary",
-            )}
-          />
-        </ShadTooltip>
-      </div>
-    </AccordionPrimitive.Trigger>
-  </AccordionPrimitive.Header>
-));
+          {children}
+
+          <ShadTooltip
+            styleClasses="z-50"
+            content={disabled ? "Empty" : "Open"}
+            side="top"
+          >
+            {React.cloneElement(icon as React.ReactElement, {
+              className: cn(
+                "h-4 w-4 font-bold transition-transform duration-200",
+                disabled ? "text-muted-foreground" : "text-primary",
+              ),
+            })}
+          </ShadTooltip>
+        </div>
+      </AccordionPrimitive.Trigger>
+    </AccordionPrimitive.Header>
+  ),
+);
 AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
 
 const AccordionContent = React.forwardRef<

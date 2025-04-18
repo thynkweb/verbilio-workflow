@@ -275,7 +275,7 @@ ifdef login
 	@echo "Running backend autologin is $(login)";
 	LANGFLOW_AUTO_LOGIN=$(login) uv run uvicorn \
 		--factory langflow.main:create_app \
-		--host 0.0.0.0 \
+		--host 127.0.0.1 \
 		--port $(port) \
 		$(if $(filter-out 1,$(workers)),, --reload) \
 		--env-file $(env) \
@@ -285,7 +285,7 @@ else
 	@echo "Running backend respecting the $(env) file";
 	uv run uvicorn \
 		--factory langflow.main:create_app \
-		--host 0.0.0.0 \
+		--host 127.0.0.1 \
 		--port $(port) \
 		$(if $(filter-out 1,$(workers)),, --reload) \
 		--env-file $(env) \

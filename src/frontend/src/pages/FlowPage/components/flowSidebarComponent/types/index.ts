@@ -48,6 +48,8 @@ export interface SidebarGroupProps {
     name: string,
   ) => void;
   uniqueInputsComponents: UniqueInputsComponents;
+  isAppOpen?: boolean;
+  toggleIsAppOpen?: () => void;
 }
 
 export interface BundleItemProps {

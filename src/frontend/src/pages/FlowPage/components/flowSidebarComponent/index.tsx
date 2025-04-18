@@ -72,7 +72,7 @@ export function FlowSidebarComponent({ isLoading }: FlowSidebarComponentProps) {
 
   const hasStore = useStoreStore((state) => state.hasStore);
   const setErrorData = useAlertStore((state) => state.setErrorData);
-  const { setOpen } = useSidebar();
+  const { setOpen, isAppsOpen, toggleIsAppsOpen } = useSidebar();
   const addComponent = useAddComponent();
 
   // State
@@ -363,6 +363,8 @@ export function FlowSidebarComponent({ isLoading }: FlowSidebarComponentProps) {
 
                 {hasBundleItems && (
                   <MemoizedSidebarGroup
+                    isAppOpen={isAppsOpen}
+                    toggleIsAppOpen={toggleIsAppsOpen}
                     BUNDLES={BUNDLES}
                     search={search}
                     sortedCategories={sortedCategories}

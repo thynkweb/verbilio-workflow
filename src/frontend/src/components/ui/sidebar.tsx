@@ -28,6 +28,8 @@ type SidebarContext = {
   setOpen: (open: boolean) => void;
   toggleSidebar: () => void;
   defaultOpen: boolean;
+  isAppsOpen: boolean;
+  toggleIsAppsOpen: () => void;
 };
 
 const SidebarContext = React.createContext<SidebarContext | null>(null);
@@ -66,7 +68,9 @@ const SidebarProvider = React.forwardRef<
     // This is the internal state of the sidebar.
     // We use openProp and setOpenProp for control from outside the component.
     const [_open, _setOpen] = React.useState(defaultOpen);
+    const [_isApp, setIsApp] = React.useState(false);
     const open = openProp ?? _open;
+
     const setOpen = React.useCallback(
       (value: boolean | ((value: boolean) => boolean)) => {
         if (setOpenProp) {
@@ -88,6 +92,11 @@ const SidebarProvider = React.forwardRef<
       return setOpen((open) => !open);
     }, [setOpen, open]);
 
+    //Helper to toggle the apps section in sidebar
+    const toggleApps = React.useCallback(() => {
+      return setIsApp((prev) => !prev);
+    }, [_isApp]);
+
     // We add a state so that we can do data-state="expanded" or "collapsed".
     // This makes it easier to style the sidebar with Tailwind classes.
     const state = open ? "expanded" : "collapsed";
@@ -99,8 +108,10 @@ const SidebarProvider = React.forwardRef<
         setOpen,
         toggleSidebar,
         defaultOpen,
+        toggleIsAppsOpen: toggleApps,
+        isAppsOpen: _isApp,
       }),
-      [state, open, setOpen, toggleSidebar, defaultOpen],
+      [state, open, setOpen, toggleSidebar, defaultOpen, _isApp],
     );
 
     const toggleSidebarShortcut = useShortcutsStore(
@@ -145,6 +156,7 @@ const SidebarProvider = React.forwardRef<
     );
   },
 );
+
 SidebarProvider.displayName = "SidebarProvider";
 
 const Sidebar = React.forwardRef<
