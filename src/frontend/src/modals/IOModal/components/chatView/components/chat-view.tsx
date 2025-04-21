@@ -1,4 +1,5 @@
-import VerbilioLogo from "@/assets/VerbilioLogo.svg?react";
+import VerbilioLogoDark from "@/assets/VerbilioLogoDark.png";
+import VerbilioLogoLight from "@/assets/VerbilioLogoLight.png";
 import { TextEffectPerChar } from "@/components/ui/textAnimation";
 import { ENABLE_IMAGE_ON_PLAYGROUND } from "@/customization/feature-flags";
 import { track } from "@/customization/utils/analytics";
@@ -9,6 +10,7 @@ import { cn } from "@/utils/utils";
 import { memo, useEffect, useMemo, useRef, useState } from "react";
 import { v5 as uuidv5 } from "uuid";
 import useTabVisibility from "../../../../../shared/hooks/use-tab-visibility";
+import { useDarkStore } from "../../../../../stores/darkStore";
 import useFlowsManagerStore from "../../../../../stores/flowsManagerStore";
 import useFlowStore from "../../../../../stores/flowStore";
 import { ChatMessageType } from "../../../../../types/chat";
@@ -49,6 +51,7 @@ export default function ChatView({
   const [chatHistory, setChatHistory] = useState<ChatMessageType[] | undefined>(
     undefined,
   );
+  const { dark } = useDarkStore();
   const messages = useMessagesStore((state) => state.messages);
   const nodes = useFlowStore((state) => state.nodes);
   const chatInput = inputs.find((input) => input.type === "ChatInput");
@@ -202,9 +205,9 @@ export default function ChatView({
             <>
               <div className="flex h-full w-full flex-col items-center justify-center">
                 <div className="flex flex-col items-center justify-center gap-4 p-8">
-                  <VerbilioLogo
-                    title="Verbilio logo"
-                    className="h-10 w-10 scale-[1.5]"
+                  <img
+                    src={dark ? VerbilioLogoDark : VerbilioLogoLight}
+                    alt="Verbilio Logo"
                   />
                   <div className="flex flex-col items-center justify-center">
                     <h3 className="mt-2 pb-2 text-2xl font-semibold text-primary">

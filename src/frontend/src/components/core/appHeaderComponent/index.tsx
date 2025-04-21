@@ -1,5 +1,6 @@
 import AlertDropdown from "@/alerts/alertDropDown";
-import VerbilioLogo from "@/assets/VerbilioLogo.svg?react";
+import VerbilioLogoDark from "@/assets/VerbilioLogoDark.png";
+import VerbilioLogoLight from "@/assets/VerbilioLogoLight.png";
 import ForwardedIconComponent from "@/components/common/genericIconComponent";
 import ShadTooltip from "@/components/common/shadTooltipComponent";
 import { Button } from "@/components/ui/button";
@@ -12,15 +13,16 @@ import useTheme from "@/customization/hooks/use-custom-theme";
 import { useResetDismissUpdateAll } from "@/hooks/use-reset-dismiss-update-all";
 import useAlertStore from "@/stores/alertStore";
 import { useEffect, useRef, useState } from "react";
+import { useDarkStore } from "../../../stores/darkStore";
 import { AccountMenu } from "./components/AccountMenu";
 import FlowMenu from "./components/FlowMenu";
-import GithubStarComponent from "./components/GithubStarButton";
 
 export default function AppHeader(): JSX.Element {
   const notificationCenter = useAlertStore((state) => state.notificationCenter);
   const navigate = useCustomNavigate();
   const [activeState, setActiveState] = useState<"notifications" | null>(null);
   const lastPath = window.location.pathname.split("/").filter(Boolean).pop();
+  const { dark } = useDarkStore();
   const notificationRef = useRef<HTMLButtonElement | null>(null);
   const notificationContentRef = useRef<HTMLDivElement | null>(null);
   useTheme();
@@ -61,7 +63,10 @@ export default function AppHeader(): JSX.Element {
           className="mr-1 flex h-[4rem] w-[6rem] items-center overflow-hidden"
           data-testid="icon-ChevronLeft"
         >
-          <VerbilioLogo />
+          <img
+            src={dark ? VerbilioLogoDark : VerbilioLogoLight}
+            alt="Verbilio Logo"
+          />
         </Button>
         {/* {ENABLE_DATASTAX_LANGFLOW && (
           <>

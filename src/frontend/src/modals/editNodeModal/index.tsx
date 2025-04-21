@@ -3,6 +3,11 @@ import { customStringify } from "@/utils/reactflowUtils";
 import { useEffect, useState } from "react";
 import { Badge } from "../../components/ui/badge";
 import { Button } from "../../components/ui/button";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarTrigger,
+} from "../../components/ui/sidebar";
 import { useDarkStore } from "../../stores/darkStore";
 import { NodeDataType } from "../../types/flow";
 import BaseModal from "../baseModal";
@@ -29,6 +34,7 @@ const EditNodeModal = ({
       return;
     setNodeClass(data.node!);
   }, [data.node]);
+
 
   return (
     <BaseModal key={data.id} open={open} setOpen={setOpen} size="x-large">

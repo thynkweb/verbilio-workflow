@@ -1,4 +1,5 @@
-import VerbilioLogo from "@/assets/VerbilioLogo.svg?react";
+import VerbilioLogoDark from "@/assets/VerbilioLogoDark.png";
+import VerbilioLogoLight from "@/assets/VerbilioLogoLight.png";
 import InputComponent from "@/components/core/parameterRenderComponent/components/inputComponent";
 import { useAddUser } from "@/controllers/API/queries/auth";
 import { CustomLink } from "@/customization/components/custom-link";
@@ -14,6 +15,7 @@ import {
   SIGN_UP_SUCCESS,
 } from "../../constants/constants";
 import useAlertStore from "../../stores/alertStore";
+import { useDarkStore } from "../../stores/darkStore";
 import {
   UserInputType,
   inputHandlerEventType,
@@ -23,6 +25,7 @@ import {
 export default function SignUp(): JSX.Element {
   const [inputState, setInputState] =
     useState<signUpInputStateType>(CONTROL_INPUT_STATE);
+  const { dark } = useDarkStore();
 
   const [isDisabled, setDisableBtn] = useState<boolean>(true);
 
@@ -90,9 +93,10 @@ export default function SignUp(): JSX.Element {
     >
       <div className="flex h-full w-full flex-col items-center justify-center bg-muted">
         <div className="flex w-72 flex-col items-center justify-center gap-2">
-          <VerbilioLogo
-            title="Verbilio logo"
+          <img
             className="mb-4 h-10 w-10 scale-[1.5]"
+            src={dark ? VerbilioLogoDark : VerbilioLogoLight}
+            alt="Verbilio Logo"
           />
           <span className="mb-6 text-2xl font-semibold text-primary">
             Sign up for Verbilio

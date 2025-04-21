@@ -1,4 +1,6 @@
-import VerbilioLogo from "@/assets/VerbilioLogo.svg?react";
+import VerbilioLogoDark from "@/assets/VerbilioLogoDark.png";
+import VerbilioLogoLight from "@/assets/VerbilioLogoLight.png";
+
 import { useLoginUser } from "@/controllers/API/queries/auth";
 import { CustomLink } from "@/customization/components/custom-link";
 import * as Form from "@radix-ui/react-form";
@@ -10,6 +12,7 @@ import { SIGNIN_ERROR_ALERT } from "../../constants/alerts_constants";
 import { CONTROL_LOGIN_STATE } from "../../constants/constants";
 import { AuthContext } from "../../contexts/authContext";
 import useAlertStore from "../../stores/alertStore";
+import { useDarkStore } from "../../stores/darkStore";
 import { LoginType } from "../../types/api";
 import {
   inputHandlerEventType,
@@ -17,6 +20,7 @@ import {
 } from "../../types/components";
 
 export default function LoginPage(): JSX.Element {
+  const { dark } = useDarkStore();
   const [inputState, setInputState] =
     useState<loginInputStateType>(CONTROL_LOGIN_STATE);
 
@@ -66,9 +70,10 @@ export default function LoginPage(): JSX.Element {
     >
       <div className="flex h-full w-full flex-col items-center justify-center bg-muted">
         <div className="flex w-72 flex-col items-center justify-center gap-2">
-          <VerbilioLogo
-            title="Verbilio logo"
+          <img
             className="mb-4 h-10 w-10 scale-[1.5]"
+            src={dark ? VerbilioLogoDark : VerbilioLogoLight}
+            alt="Verbilio Logo"
           />
           <span className="mb-6 text-2xl font-semibold text-primary">
             Sign in to Verbilio
