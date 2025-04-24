@@ -1,10 +1,13 @@
-import VerbilioLogo from "@/assets/VerbilioLogo.svg?react";
+import VerbilioLogoDark from "@/assets/VerbilioLogoDark.png";
+import VerbilioLogoLight from "@/assets/VerbilioLogoLight.png";
 import { useState } from "react";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import BaseModal from "../../modals/baseModal";
+import { useDarkStore } from "../../stores/darkStore";
 
 export default function DeleteAccountPage() {
+  const { dark } = useDarkStore();
   const [showConfirmation, setShowConfirmation] = useState(false);
 
   const handleDeleteAccount = () => {
@@ -18,8 +21,9 @@ export default function DeleteAccountPage() {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center bg-muted">
       <div className="flex w-72 flex-col items-center justify-center gap-2">
-        <VerbilioLogo
-          title="Verbilio logo"
+        <img
+          src={dark ? VerbilioLogoDark : VerbilioLogoLight}
+          alt="Verbilio Logo"
           className="mb-4 h-10 w-10 scale-[1.5]"
         />
         <span className="mb-4 text-center text-2xl font-semibold text-primary">

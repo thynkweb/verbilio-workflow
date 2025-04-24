@@ -1,4 +1,5 @@
-import VerbilioLogo from "@/assets/VerbilioLogo.svg?react";
+import VerbilioLogoDark from "@/assets/VerbilioLogoDark.png";
+import VerbilioLogoLight from "@/assets/VerbilioLogoLight.png";
 import { useLoginUser } from "@/controllers/API/queries/auth";
 import { useContext, useState } from "react";
 import { Button } from "../../../components/ui/button";
@@ -7,6 +8,7 @@ import { SIGNIN_ERROR_ALERT } from "../../../constants/alerts_constants";
 import { CONTROL_LOGIN_STATE } from "../../../constants/constants";
 import { AuthContext } from "../../../contexts/authContext";
 import useAlertStore from "../../../stores/alertStore";
+import { useDarkStore } from "../../../stores/darkStore";
 import { LoginType } from "../../../types/api";
 import {
   inputHandlerEventType,
@@ -17,6 +19,7 @@ export default function LoginAdminPage() {
   const [inputState, setInputState] =
     useState<loginInputStateType>(CONTROL_LOGIN_STATE);
   const { login } = useContext(AuthContext);
+  const { dark } = useDarkStore();
 
   const { password, username } = inputState;
   const setErrorData = useAlertStore((state) => state.setErrorData);
@@ -50,7 +53,11 @@ export default function LoginAdminPage() {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center bg-muted">
       <div className="flex w-72 flex-col items-center justify-center gap-2">
-        <VerbilioLogo title="Verbilio logo" className="h-10 w-10 scale-[1.5]" />
+        <img
+          className="h-10 w-10 scale-[1.5]"
+          src={dark ? VerbilioLogoDark : VerbilioLogoLight}
+          alt="Verbilio Logo"
+        />
         <span className="mb-6 text-2xl font-semibold text-primary">Admin</span>
         <Input
           onChange={({ target: { value } }) => {

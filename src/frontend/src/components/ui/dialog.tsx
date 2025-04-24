@@ -69,11 +69,11 @@ const DialogContent = React.forwardRef<
 
     return (
       <DialogPortal>
-        <DialogOverlay />
+        <DialogOverlay className="!bg-transparent !backdrop-blur-none" />
         <DialogPrimitive.Content
           ref={ref}
           className={cn(
-            "fixed z-50 flex w-full max-w-lg flex-col gap-4 rounded-xl border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%]",
+            "!fixed !right-0 z-50 flex !h-dvh !max-h-[100vh] !min-w-[45vw] max-w-lg flex-col gap-4 rounded-l-xl border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%]",
             className,
           )}
           {...props}
@@ -128,6 +128,7 @@ const DialogFooter = ({
       className,
     )}
     {...props}
+    title="Close the hell"
   />
 );
 DialogFooter.displayName = "DialogFooter";
